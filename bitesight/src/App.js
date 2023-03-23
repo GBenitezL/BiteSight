@@ -10,7 +10,6 @@ function App() {
       <Header />
       <div className="content-wrap">
         <Body />
-        <h1 style={{ textAlign: "center" }}>React Footer using CSS Grid</h1>
       </div>
       <Footer />
     </div>
