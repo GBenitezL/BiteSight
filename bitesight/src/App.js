@@ -10,18 +10,18 @@ function App() {
     <Router>
       <div className="App">
         {/* must add the content-wrap */}
-        <Header />
         <Switch>
           <Route path="/login">
             <Login />
           </Route>
+        <Header />
           <Route path="/">
             <div className="content-wrap">
               <Body />
             </div>
           </Route>
-        </Switch>
         <Footer />
+        </Switch>
       </div>
     </Router>
   );
