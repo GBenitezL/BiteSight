@@ -4,7 +4,6 @@ const router = Router();
 const admin = require("firebase-admin");
 const db = admin.firestore();
 
-
 router.post('/api/ratings', async (req, res) => {
     try {
       const { user_id, restaurant_id, rating } = req.body;
