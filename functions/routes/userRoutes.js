@@ -54,4 +54,24 @@ router.get("/api/users", async (req, res) => {
     }
 });
 
+router.post("/api/users/:user_id/likes", async (req, res) => {
+  try {
+    const userRef = db.collection("users").doc(req.params.user_id);
+
+    const userDoc = await userRef.get();
+    let likes = userDoc.exists ? userDoc.data().likes : {};
+
+    for (const property in req.body) {
+      likes[property] = req.body[property];
+    }
+
+    await userRef.set({ likes }, { merge: true });
+
+    return res.status(200).send("Likes updated successfully.");
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+});
+
+
 module.exports = router;
