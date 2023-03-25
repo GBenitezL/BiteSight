@@ -14,13 +14,13 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-        <Header />
           <Route path="/">
+            <Header />
             <div className="content-wrap">
               <Body />
             </div>
+            <Footer />
           </Route>
-        <Footer />
         </Switch>
       </div>
     </Router>
