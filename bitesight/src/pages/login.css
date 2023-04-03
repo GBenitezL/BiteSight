@@ -1,20 +1,46 @@
 .column {
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 100vh;
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 100vh;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
   }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-    }
-  }
+}
+
+.leftCol {
+  background-color: rgba(40, 44, 47, 0.95);
+}
+
+.rightCol {
+  background-color: #f9c307;
+}
+
+.Logo1 {
+  width: 50%;
+  height: auto;
+}
+
+.Logo2 {
+  width: 75%;
+  height: auto;
+}
+
+.botonesLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

@@ -27,7 +27,7 @@ const Body = () => {
                 <div className="flip-card">
                   <div className="flip-card-inner">
                     <div className="flip-card-front">
-                      <img src={Object.values(item)[0]} alt="Avatar" className="CardImg" />
+                      <img src={Object.values(item)[0]} alt={Object.values(item)[4]} className="CardImg" />
                     </div>
                     <div className="flip-card-back">
                       <h1>{Object.values(item)[4]}</h1>
