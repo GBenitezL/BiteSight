@@ -1,26 +1,42 @@
 const { Router } = require("express");
 const router = Router();
-
 const admin = require("firebase-admin");
-const db = admin.firestore();
+const http = require('http');
 
-router.get("/api/recommendations", async (req, res) => {
-    try {
-      const querySnapshot = await db
-        .collection("recommendation")
-        .orderBy("distancias", "asc")
-        .orderBy("PROMEDIOS DE LAS ESTRELLAS", "desc")
-        .limit(10)
-        .get();
-  
-      const docs = querySnapshot.docs;
-      const response = docs.map((doc) => doc.data());
-  
-      return res.status(200).json(response);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+
+router.get("/api/recommendations/:user_id", async (req, res) => {
+  try {
+    const user_id = req.params.user_id;
+    const options = {
+      hostname: 'gbenitezl.pythonanywhere.com',
+      port: 80,
+      path: `/recommendations/${user_id}`,
+      method: 'GET'
+    };
+    
+    const request = http.request(options, response => {
+      let data = '';
+      response.on('data', chunk => {
+        data += chunk;
+      });
+      response.on('end', async () => {
+        const recommended_restaurants = JSON.parse(data);
+        const db = admin.firestore();
+        const promises = recommended_restaurants.map(restaurant_id => db.collection("restaurants").doc(restaurant_id).get());
+        const restaurantData = await Promise.all(promises);
+        const restaurants = restaurantData.map(doc => doc.data());
+        res.status(200).json(restaurants);
+      });
+    });
+    
+    request.on('error', error => {
+      res.status(500).json(error);
+    });
+    
+    request.end();
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 });
-  
 
   module.exports = router;
