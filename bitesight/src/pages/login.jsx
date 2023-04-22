@@ -4,11 +4,13 @@ import "./login.css";
 const Login = () => {
   const handleFacebookLogin = () => {
     // handle Facebook login logic here
+    window.location.href = "/";
   };
   const handleGoogleLogin = () => {
     // handle Google login logic here
+    window.location.href = "/";
   };
-  let width = window.innerWidth;
+
   return (
     <div className="row">
       <div className="column leftCol">

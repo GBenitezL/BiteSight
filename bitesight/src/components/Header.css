@@ -17,6 +17,7 @@
   .Logo {
     grid-area: logo;
     height: 70px;
+    align-items:flex-start;
   }
   
   .Nav {
@@ -26,14 +27,14 @@
     align-items: center;
     justify-items: center;
   }
-  .Nav a {
+  .a2 {
     color: #fff;
     font-size: 20px;
     font-weight: 500;
     transition: 0.5s;
     text-decoration: none;
   }
-  .Nav a:hover {
+  .a2:hover {
     transform: scale(1.1);
   }
   .Nav button {
@@ -48,6 +49,10 @@
     border-radius: 10px;
     cursor: pointer;
     transition: 70ms;
+  }
+
+  body {
+    padding-top: 70px; /* adjust to match the height of the header */
   }
   
   .Nav button:active {

@@ -29,9 +29,13 @@ export default function Header() {
     setNavVisibility(!isNavVisible);
   };
 
+  const moveToLogin = () => {
+    window.location.href = "/login";
+  };
+
   return (
     <header className="Header">
-      <img src={require("../assets/logo.png")} className="Logo" alt="logo" />
+      <a href="/" ><img src={require("../assets/logo.png")} className="Logo" alt="logo" /></a>
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
         timeout={350}
@@ -39,10 +43,10 @@ export default function Header() {
         unmountOnExit
       >
         <nav className="Nav">
-          <a href="/">Home</a>
-          <a href="/">Articles</a>
-          <a href="/">About</a>
-          <button>Logout</button>
+          <a href="/" className="a2">Home</a>
+          <a href="/recommendations" className="a2">Recommendations</a>
+          <a href="/about" className="a2">About</a>
+          <button onClick={moveToLogin}>Login</button>
         </nav>
       </CSSTransition>
       <button onClick={toggleNav} className="Burger">
