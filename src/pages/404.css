@@ -1,57 +1,29 @@
-body {
-  background-color: #ffffff;
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f7f7f7;
 }
 
-.mainbox {
-  background-color: #ffffff;
-  margin: auto;
-  height: 600px;
-  width: 600px;
-  position: relative;
+.not-found-header {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
 }
 
-  .err {
-    color: #280fc7;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 11rem;
-    position:absolute;
-    left: 20%;
-    top: 8%;
-  }
-
-.far {
-  position: absolute;
-  font-size: 8.5rem;
-  left: 42%;
-  top: 15%;
-  color: #280fc7;
+.not-found-subheader {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #555;
+  margin-top: 1rem;
 }
 
- .err2 {
-    color: #280fc7;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 11rem;
-    position:absolute;
-    left: 68%;
-    top: 8%;
-  }
-
-.msg {
-    text-align: center;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 1.6rem;
-    position:absolute;
-    left: 16%;
-    top: 45%;
-    width: 75%;
-  }
-
-.backBtn {
-  text-decoration: none;
-  color: #280fc7;
-}
-
-.backBtn:hover {
-  text-decoration: underline;
-  color: #f1dabf;
+.not-found-text {
+  font-size: 1.2rem;
+  color: #777;
+  margin-top: 1rem;
+  text-align: center;
 }

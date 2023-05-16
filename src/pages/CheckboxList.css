@@ -1,0 +1,51 @@
+.checkbox-list-container {
+    background-color: #ffc107;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .checkbox-list-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 400px;
+  }
+  
+  .checkbox-list-item label {
+    margin-left: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+  }
+  
+  .done-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .done-button:hover {
+    background-color: rgba(40, 44, 47, 0.95);
+  }
+  
+  input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+  }
+  
+  input[type="checkbox"]:checked {
+    border-color: #000000;
+    background-color: #000000;
+  }
+  

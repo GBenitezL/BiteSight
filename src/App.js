@@ -3,18 +3,25 @@ import Home from "./pages/home";
 import FourOhFour from './pages/FourOhFour';
 import About from './pages/about';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import ResponsiveAppBar from './components/navbar';
-import Footer from "./components/footer";
+import ResponsiveAppBar from './components/Template/navbar';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Recommendations from './pages/Recommendations';
+import CheckboxList from './pages/Form';
+import Login from './pages/Login'; 
 
 function App() {
 
   return (
     <div>
-      <ResponsiveAppBar/>
+      <Header/>
       <Router>
         <Routes>
           <Route path='/' element={<Home/>} exact/>
           <Route path='/about' element={<About/>}/>
+          <Route path='/recommendations' element={<Recommendations/>}/>
+          <Route path='/form' element={<CheckboxList/>}/>
+          <Route path='/login' element={<Login/>}/>
           <Route path='*' element={<FourOhFour/>} />
         </Routes>
 		  </Router>
