@@ -51,6 +51,7 @@ export default function Header() {
 
   const onFailure = (err) => {
     console.log("failed", err);
+    setProfile(null);
   };
 
   const logOut = () => {
@@ -58,7 +59,7 @@ export default function Header() {
   };
 
   const userPicClick = () => {
-    alert("Hello, World!");
+    logOut();
   };
 
   return (
@@ -82,10 +83,17 @@ export default function Header() {
           <a href="/about" className="a2">
             About
           </a>
-          {profile ? (
-            <div className="UserPic tooltip" onClick={userPicClick}>
-              <span className="tooltiptext">{profile.name}</span>
-              <Avatar alt="User Image" src={profile.imageUrl}/>
+          {profile != null && profile.name != null ? (
+            <div>
+              <div
+                className="UserPic tooltip"
+                onClick={() => {
+                  userPicClick();
+                }}
+              >
+                <span className="tooltiptext">{profile.name}</span>
+                <Avatar alt="User Image" src={profile.imageUrl} />
+              </div>
             </div>
           ) : (
             <GoogleLogin
@@ -102,6 +110,7 @@ export default function Header() {
               onSuccess={onSuccess}
               onFailure={onFailure}
               cookiePolicy={"single_host_origin"}
+              isSignedIn={true}
             />
           )}
         </nav>
