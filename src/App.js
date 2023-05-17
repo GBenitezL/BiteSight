@@ -3,7 +3,6 @@ import Home from "./pages/home";
 import FourOhFour from './pages/FourOhFour';
 import About from './pages/about';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import ResponsiveAppBar from './components/Template/navbar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Recommendations from './pages/Recommendations';

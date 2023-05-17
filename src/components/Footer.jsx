@@ -26,6 +26,7 @@ const Footer = () => {
                 <a
                     href="https://github.com/sudiptob2/simple-react-footer"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="item3"
                 >
                     <FontAwesomeIcon icon={faGithub} />
@@ -33,6 +34,7 @@ const Footer = () => {
                 <a
                     href="http://fb.com/sudiptob2"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="item4"
                 >
                     <FontAwesomeIcon icon={faFacebook} />
@@ -40,6 +42,7 @@ const Footer = () => {
                 <a
                     href="https://www.youtube.com/"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="item5"
                 >
                     <FontAwesomeIcon icon={faYoutube} />

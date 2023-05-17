@@ -1,9 +1,9 @@
-import React, { useState, useEffect, setData } from "react";
+import React, { useState, useEffect } from "react";
 import "./Recommendations.css";
 import "./Flip.css";
 
 const Recommendations = () => {
-  const [flip, setFlip] = useState(false);
+  //const [flip, setFlip] = useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
     async function fetchData() {

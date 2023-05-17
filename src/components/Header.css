@@ -113,3 +113,39 @@
     transform: scale(0.5);
     transition: opacity 350ms, transform 350ms;
   }
+
+  .UserPic {
+    transition: transform 0.2s ease;
+  }
+  
+  .UserPic:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
