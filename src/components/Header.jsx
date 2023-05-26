@@ -2,17 +2,16 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { gapi } from "gapi-script";
 import Avatar from "@mui/material/Avatar";
+import axios from "axios";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 
 export default function Header() {
-  const [profile, setProfile] = useState([]);
-  const clientId =
-    "1015129329327-03gfdi2lgo9l4i4m0krvkqrb2c91uhan.apps.googleusercontent.com";
+  // Nav Use states
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  // Responsiveness
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 700px)");
     mediaQuery.addListener(handleMediaQueryChange);
@@ -35,31 +34,49 @@ export default function Header() {
     setNavVisibility(!isNavVisible);
   };
 
-  useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
+  // Google API - Start
+  const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState([]);
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
   });
 
-  const onSuccess = (res) => {
-    setProfile(res.profileObj);
-  };
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
 
-  const onFailure = (err) => {
-    console.log("failed", err);
-    setProfile(null);
-  };
-
+  // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
+    googleLogout();
     setProfile(null);
   };
+  // Google API - End
 
   const userPicClick = () => {
-    logOut();
+    const confirmed = window.confirm(
+      "You are about to log out, do you want to proceed?"
+    );
+
+    if (confirmed) {
+      logOut();
+    }
   };
 
   return (
@@ -83,35 +100,18 @@ export default function Header() {
           <a href="/about" className="a2">
             About
           </a>
-          {profile != null && profile.name != null ? (
-            <div>
-              <div
-                className="UserPic tooltip"
-                onClick={() => {
-                  userPicClick();
-                }}
-              >
-                <span className="tooltiptext">{profile.name}</span>
-                <Avatar alt="User Image" src={profile.imageUrl} />
-              </div>
+          {profile ? (
+            <div
+              className="UserPic tooltip"
+              onClick={() => {
+                userPicClick();
+              }}
+            >
+              <span className="tooltiptext">{profile.name}</span>
+              <Avatar alt="User Image" src={profile.picture} />
             </div>
           ) : (
-            <GoogleLogin
-              clientId={clientId}
-              render={(renderProps) => (
-                <button
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  Login
-                </button>
-              )}
-              buttonText="Login"
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={"single_host_origin"}
-              isSignedIn={true}
-            />
+            <button onClick={() => login()}>Login</button>
           )}
         </nav>
       </CSSTransition>
