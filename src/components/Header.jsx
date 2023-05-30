@@ -36,7 +36,7 @@ export default function Header() {
 
   // Google API - Start
   const [user, setUser] = useState([]);
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState(null);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
@@ -45,9 +45,7 @@ export default function Header() {
 
   useEffect(() => {
     if (user) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+      axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
           {
             headers: {
               Authorization: `Bearer ${user.access_token}`,
@@ -57,6 +55,7 @@ export default function Header() {
         )
         .then((res) => {
           setProfile(res.data);
+          localStorage.setItem('userInfo', JSON.stringify(res.data));
         })
         .catch((err) => console.log(err));
     }
@@ -66,8 +65,11 @@ export default function Header() {
   const logOut = () => {
     googleLogout();
     setProfile(null);
+    localStorage.clear();
   };
   // Google API - End
+
+  var userLogged = JSON.parse(localStorage.getItem('userInfo'));
 
   const userPicClick = () => {
     const confirmed = window.confirm(
@@ -79,6 +81,12 @@ export default function Header() {
     }
   };
 
+  useEffect(() => {
+    if(userLogged != null){
+      setProfile(userLogged);
+      console.log(userLogged);
+    }
+ });
   return (
     <header className="Header">
       <a href="/">
