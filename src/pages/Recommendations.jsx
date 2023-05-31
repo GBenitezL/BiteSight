@@ -26,7 +26,7 @@ const Recommendations = () => {
                 <div className="flip-card">
                   <div className="flip-card-inner">
                     <div className="flip-card-front">
-                      <img src={require(Object.values(item)[11][0])} alt={Object.values(item)[11][0]} className="CardImg" />
+                      <img src={(Object.values(item)[11][0])} alt={Object.values(item)[11][0]} className="CardImg" />
                     </div>
                     <div className="flip-card-back">
                       <h1>{Object.values(item)[5]}</h1>
