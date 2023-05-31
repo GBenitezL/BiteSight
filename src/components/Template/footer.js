@@ -33,7 +33,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Copyright:{" "}
             <a href="/" style={{ color: 'inherit', textDecoration: 'none' }}>
               {" "}
-              ViajaTec{" "}
+              Bitesight{" "}
             </a>
             </p>
           </div>

@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
+import Pagination from "@mui/material/Pagination";
+
 import "./Recommendations.css";
-import "./Flip.css";
+//import "./Flip.css";
 
 const Recommendations = () => {
   //const [flip, setFlip] = useState(false);
   const [data, setData] = useState(null);
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  // Fetch data
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -16,6 +24,7 @@ const Recommendations = () => {
     }
     fetchData();
   }, []);
+
   /* Data Indexes:
       0 - website (Hay nulos)
       1 - city
@@ -31,9 +40,11 @@ const Recommendations = () => {
       11 - imageUrls (Es otro array con 3 fotos)
       12 - location
       13 - categories (Otro array)
-  */  
+  */
+
   return (
     <div className="App-body">
+      {/*
       {data ? (
         <ul className="cards">
           {data.map((item) => (
@@ -57,7 +68,24 @@ const Recommendations = () => {
         </ul>
       ) : (
         <p>Loading data...</p>
-      )}
+      )}*/}
+      <div>
+        {data ? (
+          <div>
+            <p>startIndex: {((page - 1) * 3)}</p>
+            <p>endIndex: {(Math.min(((page - 1) * 3) + 3 - 1, Object.keys(data).length - 1))}</p>
+            <Pagination
+              count={Math.ceil(Object.keys(data).length / 3)}
+              showFirstButton
+              showLastButton
+              page={page}
+              onChange={handleChange}
+            />
+          </div>
+        ) : (
+          <p>Loading data...</p>
+        )}
+      </div>
     </div>
   );
 };
