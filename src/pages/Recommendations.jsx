@@ -16,6 +16,22 @@ const Recommendations = () => {
     }
     fetchData();
   }, []);
+  /* Data Indexes:
+      0 - website (Hay nulos)
+      1 - city
+      2 - imagesCount
+      3 - description (Hay nulos)
+      4 - reviewsCount
+      5 - title
+      6 - totalScore
+      7 - categoryName
+      8 - phone (Hay nulos)
+      9 - street
+      10 - price (Hay nulos)
+      11 - imageUrls (Es otro array con 3 fotos)
+      12 - location
+      13 - categories (Otro array)
+  */  
   return (
     <div className="App-body">
       {data ? (
