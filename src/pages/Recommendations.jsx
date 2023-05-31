@@ -3,6 +3,7 @@ import Pagination from "@mui/material/Pagination";
 //import "./Recommendations.css";
 import "./Flip.css";
 import Stack from "@mui/material/Stack";
+import StarRating from "../components/StarRating";
 
 const Recommendations = () => {
   //const [flip, setFlip] = useState(false);
@@ -11,7 +12,8 @@ const Recommendations = () => {
   const handleChange = (event, value) => {
     setPage(value);
   };
-  const pagesPerItem = 9;
+  const pagesPerItem = 6;
+  let dataMock = require('./mock-user.json');
 
   // Fetch data
   useEffect(() => {
@@ -40,15 +42,16 @@ const Recommendations = () => {
               <div className="flip-card-inner">
                 <div className="flip-card-front">
                   <img
-                    src={Object.values(data[i])[11][0]}
-                    alt={Object.values(data[i])[11][0]}
+                    src={Object.values(dataMock[i])[11][0]}
+                    alt={Object.values(dataMock[i])[11][0]}
                     className="CardImg"
                   />
                 </div>
                 <div className="flip-card-back">
-                  <h2>{Object.values(data[i])[5]}</h2>
-                  <h3>{Object.values(data[i])[1]}</h3>
-                  <h3>{Object.values(data[i])[6]}</h3>
+                  <h2>{Object.values(dataMock[i])[5]}</h2>
+                  <h3>{Object.values(dataMock[i])[1]}</h3>
+                  <h3>{Object.values(dataMock[i])[6]}</h3>
+                  <StarRating/>
                 </div>
               </div>
             </div>
@@ -105,17 +108,17 @@ const Recommendations = () => {
         <p>Loading data...</p>
       )}*/}
       <div>
-        {data ? (
+        {dataMock ? (
           <div>
             <Stack alignItems="center">
               <ul className="cards">
                 {renderElements(
                   (page - 1) * pagesPerItem,
-                  Math.min((page - 1) * pagesPerItem + pagesPerItem - 1, Object.keys(data).length - 1)
+                  Math.min((page - 1) * pagesPerItem + pagesPerItem - 1, Object.keys(dataMock).length - 1)
                 )}
               </ul>
               <Pagination
-                count={Math.ceil(Object.keys(data).length / pagesPerItem)}
+                count={Math.ceil(Object.keys(dataMock).length / pagesPerItem)}
                 showFirstButton
                 showLastButton
                 page={page}
