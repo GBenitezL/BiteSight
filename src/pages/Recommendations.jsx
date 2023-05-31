@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
-import "./Recommendations.css";
+//import "./Recommendations.css";
 import "./Flip.css";
+import Stack from "@mui/material/Stack";
 
 const Recommendations = () => {
   //const [flip, setFlip] = useState(false);
@@ -10,6 +11,7 @@ const Recommendations = () => {
   const handleChange = (event, value) => {
     setPage(value);
   };
+  const pagesPerItem = 9;
 
   // Fetch data
   useEffect(() => {
@@ -33,21 +35,25 @@ const Recommendations = () => {
     for (let i = startRange; i <= endRange; i++) {
       elements.push(
         <li className="cards_item">
-              <div className="card">
-                <div className="flip-card">
-                  <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                      <img src={(Object.values(data[i])[11][0])} alt={Object.values(data[i])[11][0]} className="CardImg" />
-                    </div>
-                    <div className="flip-card-back">
-                      <h1>{Object.values(data[i])[5]}</h1>
-                      <h2>{Object.values(data[i])[1]}</h2>
-                      <h2>{Object.values(data[i])[6]}</h2>
-                    </div>
-                  </div>
+          <div className="card">
+            <div className="flip-card">
+              <div className="flip-card-inner">
+                <div className="flip-card-front">
+                  <img
+                    src={Object.values(data[i])[11][0]}
+                    alt={Object.values(data[i])[11][0]}
+                    className="CardImg"
+                  />
+                </div>
+                <div className="flip-card-back">
+                  <h2>{Object.values(data[i])[5]}</h2>
+                  <h3>{Object.values(data[i])[1]}</h3>
+                  <h3>{Object.values(data[i])[6]}</h3>
                 </div>
               </div>
-            </li>
+            </div>
+          </div>
+        </li>
       );
     }
 
@@ -101,16 +107,21 @@ const Recommendations = () => {
       <div>
         {data ? (
           <div>
-            <ul className="cards">
-              {renderElements(((page - 1) * 3), (Math.min(((page - 1) * 3) + 3 - 1, Object.keys(data).length - 1)))}
-            </ul>
-            <Pagination
-              count={Math.ceil(Object.keys(data).length / 3)}
-              showFirstButton
-              showLastButton
-              page={page}
-              onChange={handleChange}
-            />
+            <Stack alignItems="center">
+              <ul className="cards">
+                {renderElements(
+                  (page - 1) * pagesPerItem,
+                  Math.min((page - 1) * pagesPerItem + pagesPerItem - 1, Object.keys(data).length - 1)
+                )}
+              </ul>
+              <Pagination
+                count={Math.ceil(Object.keys(data).length / pagesPerItem)}
+                showFirstButton
+                showLastButton
+                page={page}
+                onChange={handleChange}
+              />
+            </Stack>
           </div>
         ) : (
           <p>Loading data...</p>
