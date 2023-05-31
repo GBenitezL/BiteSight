@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
-
 import "./Recommendations.css";
-//import "./Flip.css";
+import "./Flip.css";
 
 const Recommendations = () => {
   //const [flip, setFlip] = useState(false);
@@ -24,6 +23,36 @@ const Recommendations = () => {
     }
     fetchData();
   }, []);
+
+  //const startRange = ((page - 1) * 3);
+  //const endRange = (Math.min(((page - 1) * 3) + 3 - 1, Object.keys(data).length - 1));
+
+  const renderElements = (startRange, endRange) => {
+    const elements = [];
+
+    for (let i = startRange; i <= endRange; i++) {
+      elements.push(
+        <li className="cards_item">
+              <div className="card">
+                <div className="flip-card">
+                  <div className="flip-card-inner">
+                    <div className="flip-card-front">
+                      <img src={(Object.values(data[i])[11][0])} alt={Object.values(data[i])[11][0]} className="CardImg" />
+                    </div>
+                    <div className="flip-card-back">
+                      <h1>{Object.values(data[i])[5]}</h1>
+                      <h2>{Object.values(data[i])[1]}</h2>
+                      <h2>{Object.values(data[i])[6]}</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+      );
+    }
+
+    return elements;
+  };
 
   /* Data Indexes:
       0 - website (Hay nulos)
@@ -72,8 +101,9 @@ const Recommendations = () => {
       <div>
         {data ? (
           <div>
-            <p>startIndex: {((page - 1) * 3)}</p>
-            <p>endIndex: {(Math.min(((page - 1) * 3) + 3 - 1, Object.keys(data).length - 1))}</p>
+            <ul className="cards">
+              {renderElements(((page - 1) * 3), (Math.min(((page - 1) * 3) + 3 - 1, Object.keys(data).length - 1)))}
+            </ul>
             <Pagination
               count={Math.ceil(Object.keys(data).length / 3)}
               showFirstButton
