@@ -8,7 +8,7 @@ const Recommendations = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        "https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/recommendations"
+        "https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/recommendations/0DbuPoSWLnsOpBWsuA8B"
       );
       const jsonData = await response.json();
       //console.log(jsonData);
@@ -26,11 +26,11 @@ const Recommendations = () => {
                 <div className="flip-card">
                   <div className="flip-card-inner">
                     <div className="flip-card-front">
-                      <img src={Object.values(item)[0]} alt={Object.values(item)[4]} className="CardImg" />
+                      <img src={require(Object.values(item)[11][0])} alt={Object.values(item)[11][0]} className="CardImg" />
                     </div>
                     <div className="flip-card-back">
-                      <h1>{Object.values(item)[4]}</h1>
-                      <h2>{Object.values(item)[5]}</h2>
+                      <h1>{Object.values(item)[5]}</h1>
+                      <h2>{Object.values(item)[1]}</h2>
                       <h2>{Object.values(item)[6]}</h2>
                     </div>
                   </div>

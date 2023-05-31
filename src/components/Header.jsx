@@ -45,7 +45,9 @@ export default function Header() {
 
   useEffect(() => {
     if (user) {
-      axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
           {
             headers: {
               Authorization: `Bearer ${user.access_token}`,
@@ -55,7 +57,7 @@ export default function Header() {
         )
         .then((res) => {
           setProfile(res.data);
-          localStorage.setItem('userInfo', JSON.stringify(res.data));
+          localStorage.setItem("userInfo", JSON.stringify(res.data));
         })
         .catch((err) => console.log(err));
     }
@@ -69,7 +71,7 @@ export default function Header() {
   };
   // Google API - End
 
-  var userLogged = JSON.parse(localStorage.getItem('userInfo'));
+  var userLogged = JSON.parse(localStorage.getItem("userInfo"));
 
   const userPicClick = () => {
     const confirmed = window.confirm(
@@ -82,11 +84,11 @@ export default function Header() {
   };
 
   useEffect(() => {
-    if(userLogged != null){
+    if (userLogged != null) {
       setProfile(userLogged);
       console.log(userLogged);
     }
- });
+  }, []);
   return (
     <header className="Header">
       <a href="/">
@@ -102,21 +104,27 @@ export default function Header() {
           <a href="/" className="a2">
             Home
           </a>
-          <a href="/recommendations" className="a2">
-            Recommendations
-          </a>
-          <a href="/about" className="a2">
-            About
+          {profile ? (
+            <a href={'/recommendations?=' + profile.id} className="a2">
+              Recommendations
+            </a>
+          ) : (
+            <></>
+          )}
+          <a href="/form" className="a2">
+            Form
           </a>
           {profile ? (
-            <div
-              className="UserPic tooltip"
-              onClick={() => {
-                userPicClick();
-              }}
-            >
-              <span className="tooltiptext">{profile.name}</span>
-              <Avatar alt="User Image" src={profile.picture} />
+            <div>
+              <div
+                className="UserPic tooltip"
+                onClick={() => {
+                  userPicClick();
+                }}
+              >
+                <span className="tooltiptext">{profile.name}</span>
+                <Avatar alt="User Image" src={profile.picture} />
+              </div>
             </div>
           ) : (
             <button onClick={() => login()}>Login</button>
