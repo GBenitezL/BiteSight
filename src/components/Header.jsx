@@ -55,13 +55,28 @@ export default function Header() {
             },
           }
         )
-        .then((res) => {
+        .then(async (res) => {
           setProfile(res.data);
           localStorage.setItem("userInfo", JSON.stringify(res.data));
+          const user_data = {
+            email: res.data.email,
+            name: res.data.name,
+          };
+          try {
+            const response = await axios.post("https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users", user_data);
+            const user_email = JSON.parse(localStorage.getItem('userInfo')).email;
+            const userIdResponse = await axios.post(`https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users/getUserByEmail`, { email: user_email });
+            const userId = userIdResponse.data.id;
+            localStorage.setItem('user_id', userId);
+  
+          } catch (error) {
+            console.error(error);
+          }
         })
         .catch((err) => console.log(err));
     }
   }, [user]);
+   
 
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
