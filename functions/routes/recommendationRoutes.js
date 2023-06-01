@@ -24,7 +24,7 @@ router.get("/api/recommendations/:user_id", async (req, res) => {
         const db = admin.firestore();
         const promises = recommended_restaurants.map(restaurant_id => db.collection("restaurants").doc(restaurant_id).get());
         const restaurantData = await Promise.all(promises);
-        const restaurants = restaurantData.map(doc => doc.data());
+        const restaurants = restaurantData.map(doc => ({ id: doc.id, ...doc.data() }));
         res.status(200).json(restaurants);
       });
     });

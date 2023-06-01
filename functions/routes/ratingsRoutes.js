@@ -5,18 +5,29 @@ const admin = require("firebase-admin");
 const db = admin.firestore();
 
 router.post('/api/ratings', async (req, res) => {
-    try {
+  try {
       const { user_id, restaurant_id, rating } = req.body;
-      const docRef = await db.collection('ratings').add({
-        user_id,
-        restaurant_id,
-        rating,
-        timestamp: Date.now()
-      });
-      res.status(201).json({ id: docRef.id });
-    } catch (error) {
+      const ratingsRef = db.collection('ratings');
+      const snapshot = await ratingsRef.where('user_id', '==', user_id).where('restaurant_id', '==', restaurant_id).limit(1).get();
+      if (snapshot.empty) {
+          const docRef = await ratingsRef.add({
+              user_id,
+              restaurant_id,
+              rating,
+              timestamp: Date.now()
+          });
+          res.status(201).json({ id: docRef.id });
+      } else {
+          const doc = snapshot.docs[0];
+          await ratingsRef.doc(doc.id).update({
+              rating,
+              timestamp: Date.now()
+          });
+          res.status(200).json({ message: 'Rating updated' });
+      }
+  } catch (error) {
       res.status(500).json({ error: error.message });
-    }
+  }
 });
 
 
