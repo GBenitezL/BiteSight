@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
-//import "./Recommendations.css";
+import "./Recommendations.css";
 import "./Flip.css";
 import Stack from "@mui/material/Stack";
 import StarRating from "../components/StarRating";
@@ -65,7 +65,7 @@ import StarRating from "../components/StarRating";
 //   };
 
 //   /* Data Indexes:
-//       0 - id 
+//       0 - id
 //       1 - website (Hay nulos)
 //       2 - city
 //       3 - imagesCount
@@ -105,10 +105,10 @@ import StarRating from "../components/StarRating";
 //           </div>
 //         ) : (
 //           <p style={{
-//             position: 'absolute', 
-//             top: '50%', 
-//             left: '50%', 
-//             transform: 'translate(-50%, -50%)', 
+//             position: 'absolute',
+//             top: '50%',
+//             left: '50%',
+//             transform: 'translate(-50%, -50%)',
 //             fontSize: '2em',
 //             color: '#444'
 //           }}>
@@ -128,12 +128,12 @@ const Recommendations = () => {
     setPage(value);
   };
   const pagesPerItem = 6;
-  let dataMock = require('./mock-user.json');
+  let dataMock = require("./mock-user.json");
 
   const renderElements = (startRange, endRange) => {
     const elements = [];
     for (let i = startRange; i <= endRange; i++) {
-      const restaurant_id = Object.values(dataMock[i])[0]
+      const restaurant_id = Object.values(dataMock[i])[0];
       elements.push(
         <li className="cards_item">
           <div className="card">
@@ -145,12 +145,37 @@ const Recommendations = () => {
                     alt={Object.values(dataMock[i])[12][0]}
                     className="CardImg"
                   />
+                  <h3 style={{ color: "#ffc107" }}>
+                    {Object.values(dataMock[i])[6]}
+                  </h3>
                 </div>
-                <div className="flip-card-back">
-                  <h2>{Object.values(dataMock[i])[6]}</h2>
-                  <h3>{Object.values(dataMock[i])[2]}</h3>
-                  <h3>{Object.values(dataMock[i])[7]}</h3>
-                  <StarRating restaurant_id={restaurant_id} user_id={localStorage.getItem('user_id')} />
+                <div className="flip-card-back" style={{ color: "#2a2a2a" }}>
+                  <h3>{Object.values(dataMock[i])[6]}</h3>
+                  <div className="grid-container-card-back">
+                    <div className="grid-item-card-back row-span-all border-line">
+                      {Object.values(dataMock[i])[8]}
+                    </div>
+                    <div className="grid-item-card-back row-span-all"/>
+                    <div className="grid-item-card-back row-span-all"/>
+                    <div className="grid-item-card-back picture-card-back">
+                      <img
+                        src={require("../assets/location-24.png")}
+                        alt="LocationIcon"
+                      />
+                    </div>
+                    <div className="grid-item-card-back">
+                      {Object.values(dataMock[i])[2]}
+                    </div>
+                    <div className="grid-item-card-back">
+                      {Object.values(dataMock[i])[10]}
+                    </div>
+                  </div>
+                  <br />
+                  <h4>General Rating: {Object.values(dataMock[i])[7]}</h4>
+                  <StarRating
+                    restaurant_id={restaurant_id}
+                    user_id={localStorage.getItem("user_id")}
+                  />
                 </div>
               </div>
             </div>
@@ -171,7 +196,10 @@ const Recommendations = () => {
               <ul className="cards">
                 {renderElements(
                   (page - 1) * pagesPerItem,
-                  Math.min((page - 1) * pagesPerItem + pagesPerItem - 1, Object.keys(dataMock).length - 1)
+                  Math.min(
+                    (page - 1) * pagesPerItem + pagesPerItem - 1,
+                    Object.keys(dataMock).length - 1
+                  )
                 )}
               </ul>
               <Pagination
@@ -184,14 +212,16 @@ const Recommendations = () => {
             </Stack>
           </div>
         ) : (
-          <p style={{
-            position: 'absolute', 
-            top: '50%', 
-            left: '50%', 
-            transform: 'translate(-50%, -50%)', 
-            fontSize: '2em',
-            color: '#444'
-          }}>
+          <p
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              fontSize: "2em",
+              color: "#444",
+            }}
+          >
             Getting your recommendations...
           </p>
         )}
