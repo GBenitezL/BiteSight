@@ -155,9 +155,8 @@ const Recommendations = () => {
                     <div className="grid-item-card-back row-span-all border-line">
                       {Object.values(dataMock[i])[8]}
                     </div>
-                    <div className="grid-item-card-back row-span-all"/>
-                    <div className="grid-item-card-back row-span-all"/>
-                    <div className="grid-item-card-back picture-card-back">
+                    <div className="grid-item-card-back row-span-all" />
+                    <div className="grid-item-card-back picture-double-card-back">
                       <img
                         src={require("../assets/location-24.png")}
                         alt="LocationIcon"
@@ -169,8 +168,31 @@ const Recommendations = () => {
                     <div className="grid-item-card-back">
                       {Object.values(dataMock[i])[10]}
                     </div>
+                    {Object.values(dataMock[i])[1] ? (
+                      <>
+                      <div className="grid-item-card-back picture-card-back">
+                        <img src={require("../assets/world-wide-web.png")} alt="Website Icon" />
+                      </div>
+                      <div className="grid-item-card-back">
+                        <a href={Object.values(dataMock[i])[1]} className="websiteLink">Click to visit their website!</a>
+                      </div>
+                    </>
+                    ) : (
+                      <></>
+                    )}
+                    {Object.values(dataMock[i])[9] ? (
+                      <>
+                        <div className="grid-item-card-back picture-card-back">
+                          <img src={require("../assets/phone-call.png")} alt="Phone Icon" />
+                        </div>
+                        <div className="grid-item-card-back">
+                          {Object.values(dataMock[i])[9]}
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
-                  <br />
                   <h4>General Rating: {Object.values(dataMock[i])[7]}</h4>
                   <StarRating
                     restaurant_id={restaurant_id}
