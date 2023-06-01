@@ -19,7 +19,7 @@ function App() {
           <Route path='/' element={<Home/>} exact/>
           <Route path='/about' element={<About/>}/>
           <Route path='/recommendations' element={<Recommendations/>}/>
-          <Route path='/form' element={<CheckboxList/>}/>
+          <Route path='/preferences' element={<CheckboxList/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='*' element={<FourOhFour/>} />
         </Routes>

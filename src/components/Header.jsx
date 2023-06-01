@@ -63,12 +63,18 @@ export default function Header() {
             name: res.data.name,
           };
           try {
-            const response = await axios.post("https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users", user_data);
-            const user_email = JSON.parse(localStorage.getItem('userInfo')).email;
-            const userIdResponse = await axios.post(`https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users/getUserByEmail`, { email: user_email });
+            const response = await axios.post(
+              "https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users",
+              user_data
+            );
+            const user_email = JSON.parse(localStorage.getItem("userInfo"))
+              .email;
+            const userIdResponse = await axios.post(
+              `https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users/getUserByEmail`,
+              { email: user_email }
+            );
             const userId = userIdResponse.data.id;
-            localStorage.setItem('user_id', userId);
-  
+            localStorage.setItem("user_id", userId);
           } catch (error) {
             console.error(error);
           }
@@ -76,7 +82,6 @@ export default function Header() {
         .catch((err) => console.log(err));
     }
   }, [user]);
-   
 
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
@@ -120,15 +125,17 @@ export default function Header() {
             Home
           </a>
           {profile ? (
-            <a href={'/recommendations?=' + profile.id} className="a2">
-              Recommendations
-            </a>
+            <>
+              <a href={"/recommendations?=" + profile.id} className="a2">
+                Recommendations
+              </a>
+              <a href="/preferences" className="a2">
+                Preferences
+              </a>
+            </>
           ) : (
             <></>
           )}
-          <a href="/form" className="a2">
-            Form
-          </a>
           {profile ? (
             <div>
               <div
