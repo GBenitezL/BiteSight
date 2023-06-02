@@ -35,7 +35,7 @@ const Recommendations = () => {
     const interval = setInterval(() => {
       // Update the number between 0 and 2
       setNumber((prevNumber) => (prevNumber === 0 ? 2 : 0));
-    }, 1000); // Change the interval as per your requirements (in milliseconds)
+    }, 5000); // Change the interval as per your requirements (in milliseconds)
 
     // Clean up the interval when the component is unmounted
     return () => clearInterval(interval);
