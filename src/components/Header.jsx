@@ -62,6 +62,7 @@ export default function Header() {
             email: res.data.email,
             name: res.data.name,
           };
+          window.location = "/preferences";
           try {
             const response = await axios.post(
               "https://us-central1-bitesight-858b3.cloudfunctions.net/app/api/users",

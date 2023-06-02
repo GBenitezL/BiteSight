@@ -71,3 +71,7 @@ input[type="checkbox"]:checked {
   border-color: #000000;
   background-color: #000000;
 }
+
+body {
+  background-color: #ffc107;
+}
