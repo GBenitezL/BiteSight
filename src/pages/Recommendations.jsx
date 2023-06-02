@@ -210,7 +210,7 @@ const Recommendations = () => {
   };
 
   return (
-    <div className="App-body">
+    <div className="App-body" style={{"margin-bottom": "4rem"}}>
       <div>
         {dataMock ? (
           <div>

@@ -76,7 +76,7 @@ function CheckboxList() {
     }
 
     return (
-        <div>
+        <div style={{"margin-bottom": "4rem"}}>
             <div className="checkbox-list-container">
                 <h1>Welcome!</h1>
                 <div className="checkbox-list">
