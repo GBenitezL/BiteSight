@@ -88,6 +88,7 @@ export default function Header() {
     googleLogout();
     setProfile(null);
     localStorage.clear();
+    window.location = "/";
   };
   // Google API - End
 
