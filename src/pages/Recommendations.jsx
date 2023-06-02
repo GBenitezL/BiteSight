@@ -29,6 +29,18 @@ const Recommendations = () => {
     fetchData();
   }, []);
 
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Update the number between 0 and 2
+      setNumber((prevNumber) => (prevNumber === 0 ? 2 : 0));
+    }, 1000); // Change the interval as per your requirements (in milliseconds)
+
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(interval);
+  }, []);
+
   const renderElements = (startRange, endRange) => {
     const elements = [];
     for (let i = startRange; i <= endRange; i++) {
@@ -40,8 +52,8 @@ const Recommendations = () => {
               <div className="flip-card-inner">
                 <div className="flip-card-front">
                   <img
-                    src={Object.values(data[i])[12][0]}
-                    alt={Object.values(data[i])[12][0]}
+                    src={Object.values(data[i])[12][number]}
+                    alt="Restaurant Image"
                     className="CardImg"
                   />
                   <h3 style={{ color: "#ffc107" }}>
