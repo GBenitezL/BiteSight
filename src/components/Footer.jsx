@@ -24,7 +24,7 @@ const Footer = () => {
                     </span>
                 </div>
                 <a
-                    href="https://github.com/sudiptob2/simple-react-footer"
+                    href="https://github.com/GBenitezL/BiteSight"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="item3"
